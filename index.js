@@ -1,13 +1,21 @@
 const express = require('express')
 const app = express()
+const cluster = require('cluster') 
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
 const routes = require('./app/routes/index')
+const port = 5050
 
+
+
+if(cluster.isMaster){
+    cluster.fork()
+}else{
+    
 dotenv.config()
 
 
-const port = 5050
+
 
 
 
@@ -30,3 +38,5 @@ app.listen(port, () =>{
     console.log(`Calling Zaddy on ${port}`)  
 })
   
+
+}
