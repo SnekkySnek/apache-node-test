@@ -1,0 +1,21 @@
+//to be placed inside of /etc/apache2/sites-available and sites-enabled/
+
+// configure /etc/hosts (nano) to connect ip to servername
+<VirtualHost *:80>
+  ServerName local.example.com
+  ErrorLog   "/var/log/httpd/com.example.local-error_log"
+  CustomLog  "/var/log/httpd/com.example.local-access_log" common
+
+  ## Here's our magic
+  ProxyRequests off
+
+  <Proxy *>
+    Order deny,allow
+    Allow from all
+  </Proxy>
+
+  <Location /> # no, this closing tag is not a typo
+    ProxyPass        http://localhost:4567 # Our port goes here
+    ProxyPassReverse http://localhost:4567
+  </Location>
+</VirtualHost>

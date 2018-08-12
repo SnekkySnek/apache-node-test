@@ -1,9 +1,11 @@
-const router = require('express').Router()
-const clientRoutes = require('./client.routes')
+const router = require('express').Router();
+const clientRoutes = require('./client.routes');
+const appRoutes = require('./app.routes')
+
 
 module.exports = router
 
-// router.use('/api/portfolio', appRoutes)
+router.use('/api/apacheSnek', appRoutes)
 
 router.use(clientRoutes)
 
